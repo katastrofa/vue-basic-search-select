@@ -30,7 +30,13 @@ let veci2 = [
   {value: 15, label: '15: Life of Brian'},
   {value: 16, label: '16: Search for holy grail'},
   {value: 17, label: '17: Erasorhead'},
-  {value: 18, label: '18: The ultimate sin'}
+  {value: 18, label: '18: The ultimate sin'},
+  {value: 19, label: '19: This is very long list'},
+  {value: 20, label: '20: Maybe even longer'},
+  {value: 21, label: '21: Then you would thing'},
+  {value: 22, label: '22: I meant think'},
+  {value: 23, label: '23: Oh yeah'},
+  {value: 24, label: '24: Typical misspellings'}
 ]
 
 export default {
