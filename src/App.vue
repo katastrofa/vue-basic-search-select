@@ -1,56 +1,63 @@
 <template>
   <div id="app">
-    <div style="max-width: 400px">
-      <input type="text" name="shit" tabindex="5">
-      <basic-select :options="dataOptions" placeholder="Please select" tab-index="10"></basic-select>
-      <basic-select :options="dataOptions2" placeholder="Davaj" tab-index="20"></basic-select>
+    <div class="ui segment">
+      <p>Normal style</p>
+      <basic-search-select :options="dataOptions" placeholder="Select Movie" tab-index="10" />
+      <basic-search-select :options="dataOptions2" placeholder="Some text" tab-index="20" />
+    </div>
+    <div class="ui inverted segment">
+      <p>Inverted</p>
+      <basic-search-select :options="dataOptions" placeholder="Select Movie" tab-index="30" />
+      <basic-search-select :options="dataOptions2" placeholder="Some text" tab-index="40" />
     </div>
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello'
-import BasicSelect from './components/BasicSelect.vue'
+import BasicSearchSelect from './components/BasicSearchSelect.vue'
 
-let veci = [
-  {value: 1, label: '1: Moj Vlastny'},
-  {value: 2, label: '2: UK moj'},
-  {value: 3, label: '3: Plump fiction'},
-  {value: 4, label: '4: Bridesmaids'},
-  {value: 5, label: '5: Some shit'},
-  {value: 6, label: '6: Nieco uplne ine'}
+let someEntries = [
+  {value: 1, label: '01: Vertigo'},
+  {value: 2, label: '02: JCVD'},
+  {value: 3, label: '03: Batman'},
+  {value: 4, label: '04: Star Wars'},
+  {value: 5, label: '05: Mission Impossible: Ghost Protocol'},
+  {value: 6, label: '06: Enter the Void'}
 ]
 
-let veci2 = [
-  {value: 10, label: '10: Nove veci'},
-  {value: 11, label: '11: Dalsia'},
-  {value: 12, label: '12: Stupid songs'},
-  {value: 13, label: '13: Shitting in the middle of the street'},
-  {value: 14, label: '14: And now for something completely different'},
-  {value: 15, label: '15: Life of Brian'},
-  {value: 16, label: '16: Search for holy grail'},
-  {value: 17, label: '17: Erasorhead'},
-  {value: 18, label: '18: The ultimate sin'},
-  {value: 19, label: '19: This is very long list'},
-  {value: 20, label: '20: Maybe even longer'},
-  {value: 21, label: '21: Then you would thing'},
-  {value: 22, label: '22: I meant think'},
-  {value: 23, label: '23: Oh yeah'},
-  {value: 24, label: '24: Typical misspellings'}
+let someEntries2 = [
+  {value: 1, label: '01: Vertigo'},
+  {value: 2, label: '02: JCVD'},
+  {value: 3, label: '03: Batman'},
+  {value: 4, label: '04: Star Wars'},
+  {value: 5, label: '05: Mission Impossible: Ghost Protocol'},
+  {value: 6, label: '06: Enter the Void'},
+  {value: 7, label: '07: Scott Pilgrim vs. the World'},
+  {value: 8, label: '08: Lord of the Rings'},
+  {value: 9, label: '09: Se7en'},
+  {value: 10, label: '10: Catch Me If You Can'},
+  {value: 11, label: '11: Touch of Evil'},
+  {value: 12, label: '12: Napoleon Dynamite'},
+  {value: 13, label: '13: Kiss Kiss Bang Bang'},
+  {value: 14, label: '14: Fight Club'},
+  {value: 15, label: '15: Juno'},
+  {value: 16, label: '16: The Shining'},
+  {value: 17, label: '17: Snatch'},
+  {value: 18, label: '18: 101 Dalmatians'},
+  {value: 19, label: '19: The Girl with the Dragon Tattoo'}
 ]
 
 export default {
   name: 'app',
   components: {
-    BasicSelect,
-    Hello
+    BasicSearchSelect
   },
   computed: {
     dataOptions: function () {
-      return veci
+      return someEntries
     },
     dataOptions2: function () {
-      return veci2
+      return someEntries2
     }
   }
 }
@@ -63,6 +70,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin: 150px;
+  max-width: 400px;
 }
 </style>

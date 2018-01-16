@@ -1,5 +1,11 @@
 <template>
-  <div class="ui fluid search selection dropdown inverted" :class="{ 'active visible': showMenu }" @click="openMenu">
+  <div
+    class="ui fluid search selection dropdown"
+    :class="{ 'active visible': showMenu }"
+    tabindex="-1"
+    @click="openMenu"
+    @focusin="gotFocus"
+  >
     <i class="dropdown icon"></i>
     <input
       class="search"
@@ -13,7 +19,7 @@
       @keydown.down.prevent="nextItem"
       @keydown.enter.prevent=""
       @keyup.enter.prevent="selectEnterItem"
-      @keydown.esc.prevent="closeMenu"
+      @keyup.esc.prevent="closeMenuEsc"
     />
     <div class="text" :class="{ 'default': isDefault }">{{ inputText }}</div>
     <div class="menu transition" @mousedown.prevent :class="{ 'visible': showMenu }" ref="menu" tabindex="-1">
@@ -30,13 +36,12 @@
 
 <script>
   export default {
-    name: 'basic-select',
+    name: 'basic-search-select',
     props: {
       selected: Object,
       options: Array,
       placeholder: String,
-      tabIndex: String,
-      onChange: Function
+      tabIndex: [String, Number]
     },
     data: function () {
       return {
@@ -56,9 +61,6 @@
         if (this.searchText !== '') return ''
         return this.selectedEntry ? this.selectedEntry.label : placeholder
       },
-      selectedLabel: function () {
-        return this.selectedEntry ? this.selectedEntry.label : ''
-      },
       filteredOptions: function () {
         if (this.searchText) {
           this.showMenu = true
@@ -69,6 +71,9 @@
       }
     },
     methods: {
+      gotFocus: function () {
+        this.$refs.input.focus()
+      },
       openMenu: function () {
         this.showMenu = true
         this.$refs.input.focus()
@@ -77,12 +82,19 @@
         this.showMenu = false
         this.searchText = ''
       },
+      closeMenuEsc: function (event) {
+        if (this.showMenu) {
+          event.customPrevent = true
+        }
+        this.closeMenu()
+      },
       blurInput: function () {
         this.closeMenu()
       },
       selectItem: function (option) {
         this.selectedEntry = option
         this.closeMenu()
+        this.$emit('select-change', this.selectedEntry)
       },
 
       lowerIndex: function (index) {
@@ -152,6 +164,7 @@
         } else {
           this.selectedEntry = this.filteredOptions[this.pointer]
           this.closeMenu()
+          this.$emit('select-change', this.selectedEntry)
         }
       },
       markItem: function (i) {
@@ -174,10 +187,43 @@
     color: rgba(0, 0, 0, 0.95);
   }
   .stop-hover:hover {
-    background: rgba(0, 0, 0, 0) !important;
+    background: rgba(0, 0, 0, 0);
   }
   .stop-hover.current {
-    background: rgba(0, 0, 0, 0.05) !important;
-    color: rgba(0, 0, 0, 0.95) !important;
+    background: rgba(0, 0, 0, 0.05);
+    color: rgba(0, 0, 0, 0.95) ;
+  }
+
+  .ui.inverted .search.dropdown, .ui.inverted .search.dropdown .text {
+    background: #404040;
+    color: rgba(255, 255, 255, .9);
+  }
+  .ui.inverted .selection.active, .ui.inverted .selection.active:hover {
+    border-color: rgba(200, 20, 20, .5);
+  }
+  .ui.inverted .selection.active .menu, .ui.inverted .selection.active:hover .menu, .ui.inverted .selection.active .menu:hover {
+    background: #202020;
+    border-color: rgba(200, 20, 20, .5);
+  }
+  .ui.inverted .search.dropdown .menu > .item {
+    color: rgba(255, 255, 255, .9);
+    border-top: 1px solid rgba(200, 200, 200, .3);
+  }
+  .ui.inverted .search.dropdown .menu > .item.current {
+    background: rgba(220, 220, 220, .1);
+    color: rgba(255, 255, 255, .9);
+  }
+
+  .ui.inverted div::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, .1);
+  }
+  .ui.inverted div::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, .25);
   }
 </style>
+
+
+
+
+
+
