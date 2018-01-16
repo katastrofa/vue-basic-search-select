@@ -1,6 +1,6 @@
 # very-simple-vue-select
 
-> Very simple Vue select box with search and proper keyboard support
+> Very simple Vue select box with search and proper keyboard support. Uses Semantic UI for CSS.
 
 ## Build Setup
 
